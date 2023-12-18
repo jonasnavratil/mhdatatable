@@ -60,6 +60,15 @@ export default {
       this.top = menuBtnEl.top + menuBtnEl.height
       this.left = isOverflow == false ? menuBtnEl.left - this.isOverflowDelta(this.$parent.$el, event.target) : menuBtnEl.left - 15
       this.show = true
+      this.$nextTick(() => {
+        let rect = this.$el.getBoundingClientRect()
+        let bottomPosition = this.$el.clientHeight + rect.y
+        let overflowViewPort = bottomPosition - document.documentElement.clientHeight
+        if (overflowViewPort > 0) {
+          let topPosition = document.documentElement.clientHeight - this.$el.clientHeight
+          this.top = topPosition
+        }
+      })
     },
     isOverflowDelta(parent, child) {
       let left = this.$el.clientWidth

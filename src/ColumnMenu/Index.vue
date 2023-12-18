@@ -176,6 +176,7 @@ export default {
     },
     handleColumnVisibilityChange (col, isChecked) {
       this.$set(col, 'visible', isChecked)
+      this.$emit('column-set-visibility')
       this.$emit('force-grid-resize')
     },
     eventEndHandler (evt) {

@@ -98,6 +98,7 @@
                  v-on:column-pinned-right="handleEvent($event, 'columnPinnedRight')"
                  v-on:column-unpinned-right="handleEvent($event, 'columnUnpinnedRight')"
                  v-on:update:show = "columnMenu.show = $event"
+                 v-on:column-set-visibility="handleEvent($event, 'columnMenu-setVisibility')"
     ></column-menu>
 
     <context-menu v-bind="propsToNormalTable" />
@@ -464,6 +465,12 @@ export default {
           return accumulator
         }, 0)
 
+        this.$emit('force-grid-store')
+
+        return
+      }
+
+      if (type === 'columnMenu-setVisibility') {
         this.$emit('force-grid-store')
 
         return

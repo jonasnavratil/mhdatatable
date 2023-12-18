@@ -12,8 +12,12 @@
     "url": "https://github.com/OneWayTech/vue2-datatable/issues"
   },
   "dependencies": {
+    "css-element-queries": "^1.1.1",
+    "intersection-observer": "^0.5.1",
     "lodash": "^4.17.4",
+    "popper.js": "^1.14.6",
     "sortablejs": "^1.10.1",
+    "tippy.js": "^2.6.0",
     "vue-resize-directive": "^1.1.4",
     "vue-tippy": "^2.0.24",
     "vuedraggable": "^2.23.2"
@@ -61,7 +65,7 @@
   "license": "MIT",
   "main": "dist/min.js",
   "module": "src/main.js",
-  "name": "@fibit/datagrid",
+  "name": "@tsit/vue2-datatable-component-mhascak",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Klainer/vue2-datatable.git"
@@ -77,7 +81,7 @@
     "pretest": "npm run lint",
     "start": "vue build --config build/examples.js",
     "test": "ava",
-    "refreshVSToken" : "vsts-npm-auth -config .npmrc"
+    "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
-  "version": "3.5.1"
+  "version": "3.5.11"
 }

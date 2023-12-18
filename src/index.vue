@@ -286,7 +286,14 @@ export default {
             index: i,
             isFilterApplied: false
           })
-
+          if (this.query?.filters) {
+            let filteredColumn = this.query.filters.find(filter => filter.dataIndx === item.field)
+            if (filteredColumn) {
+              this.$set(item, 'isFilterApplied', true)
+            } else if (item.isFilterApplied !== false) {
+              this.$set(item, 'isFilterApplied', false)
+            }
+          }
           this.headerColumns.push(item)
         })
       },
