@@ -83,5 +83,5 @@
     "test": "ava",
     "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
-  "version": "3.5.11"
+  "version": "3.5.12"
 }

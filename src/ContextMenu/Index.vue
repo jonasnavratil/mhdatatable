@@ -28,7 +28,7 @@ export default {
   mixins: [props],
   methods: {
     eventEndScrollHandler(evt) {
-      if (evt.path.find(x => x.className === 'mh-context-menu')) {
+      if (evt.path && evt.path.find(x => x.className === 'mh-context-menu')) {
         return
       }
       this.xprops.eventbus.$emit('hide-context-menu')
