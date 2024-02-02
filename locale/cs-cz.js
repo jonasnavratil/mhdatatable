@@ -20,6 +20,9 @@ export default {
   'Pin left': 'Připnout doleva',
   'Pin right': 'Připnout doprava',
   'No pin': 'Zrušit připnutí',
-  'Auto size This Column': 'Automická šířka',
-  'Columns': 'Sloupce'
+  'Auto size This Column': 'Automatická šířka',
+  'Columns': 'Sloupce',
+
+  /* Pagination.vue */
+  'Go to page': 'Jít na stránku'
 }

@@ -30,7 +30,8 @@ export default {
       { title: 'Age', field: 'age', thComp: 'FilterTh', sortable: true , colStyle: {width: '100px'}, isFilterDisabled: true },
       { title: 'Email', field: 'email', visible: 'false', colStyle: {width: '100px'} },
       { title: 'Country', field: 'country',  visible: 'false', minWidth: 300, visible: 'false', colStyle: {width: '600px'}   },
-      { title: 'Operation', tdComp: 'Opt' , fixed: "right",  visible: 'false', colStyle: {width: '650px'}, isTreeColumn: true  }
+      { title: 'Operation', tdComp: 'Opt' , fixed: "right",  visible: 'false', colStyle: {width: '650px'}, isTreeColumn: true  },
+      { title: 'Multiline', tdComp: 'MultiLineTextTd', visible: 'true' }
     ],
     //.map(col => (col.colStyle = { width: '200px' }, col)),
     data: [],

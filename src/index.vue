@@ -286,7 +286,7 @@ export default {
             index: i,
             isFilterApplied: false
           })
-          if (this.query?.filters) {
+          if (this.query && this.query.filters) {
             let filteredColumn = this.query.filters.find(filter => filter.dataIndx === item.field)
             if (filteredColumn) {
               this.$set(item, 'isFilterApplied', true)

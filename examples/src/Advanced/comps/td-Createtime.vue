@@ -1,5 +1,8 @@
 <template>
-  <span>{{ t }}</span>
+  <div>
+    <span>{{ t }}</span>
+    <p>bigger column</p>
+  </div>
 </template>
 <script>
 import moment from 'moment'

@@ -30,7 +30,6 @@ export default {
       columns: (() => {
         const cols = [
           { title: 'UID', field: 'uid', label: 'User ID', sortable: true, visible: 'true' },
-          { title: 'Email', field: 'email', visible: false, thComp: 'FilterTh', tdComp: 'Email' },
           { title: 'Username', field: 'name', thComp: 'FilterTh', tdStyle: { fontStyle: 'italic' } },
           { title: 'Country', field: 'country', thComp: 'FilterTh', thStyle: { fontWeight: 'normal' } },
           { title: 'IP', field: 'ip', visible: false, tdComp: 'IP' },

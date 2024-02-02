@@ -8,7 +8,8 @@ export default {
   IP: require('./td-IP'),
   Opt: require('./td-Opt'),
   FilterTh: require('./th-Filter'),
-  ContextMenuActions: require('./contextMenu-actions')
+  ContextMenuActions: require('./contextMenu-actions'),
+  MultiLineTextTd: require('./td-MultiLineText')
   // [Vue warn]: Do not use built-in or reserved HTML elements as component id: Filter
   // Filter: require('./th-Filter')
 }

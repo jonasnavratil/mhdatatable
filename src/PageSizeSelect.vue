@@ -1,7 +1,7 @@
 <template>
 <div>
   <label class="-page-size-select-label" name="PageSizeSelect">
-    <select class="form-control input-sm -page-size-select"  v-model="query.limit"
+    <select class="form-control -page-size-select"  v-model="query.limit"
       @change="query.offset = 0 /* reset to the first page */">
       <option v-for="(i, index) in pageSizeOptions" :value="i" :key="index">{{ i }}</option>
     </select>
@@ -24,7 +24,7 @@ export default {
   margin: 0;
   width: 65px;
   border-radius: 0 !important;
- 
+  height: 28px !important;
 }
 .-page-size-select-label {
   margin: 0;
