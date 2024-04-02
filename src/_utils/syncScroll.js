@@ -43,12 +43,8 @@ export default function (els, callback, isHorizontal) {
       if(others != null && others.length > 0){
         var normalTableBody = others[0]
 
-        var hasHorizontalScrollbar = normalTableBody.scrollWidth > normalTableBody.clientWidth;
-        var hasVerticalScrollbar = normalTableBody.scrollHeight > normalTableBody.clientHeight;
-
-        if(hasVerticalScrollbar) {
-          e.preventDefault()
-        }
+        var hasHorizontalScrollbar = normalTableBody.scrollWidth > normalTableBody.clientWidth
+        var hasVerticalScrollbar = normalTableBody.scrollHeight > normalTableBody.clientHeight
       } else {
         e.preventDefault()
       }
