@@ -38,7 +38,7 @@
                     }]"
         >
           <table-frame v-bind="propsToNormalTable">
-            <component :is="`Table${x}`" v-bind="propsToNormalTable" @header-resize="headerResize" @handle-event="handleEvent"/>
+            <component :is="`Table${x}`" v-bind="propsToNormalTable" @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.normal, params)" ref="normalTable" :key="reloadKey" />
           </table-frame>
         </div>
 
@@ -50,7 +50,7 @@
             :style="[ x === 'Body' &&  { overflow: 'hidden' }, x === 'Body' && $props.fullHeight != null && $props.fullHeight.enabled == true &&  {height: `${fixedTableHeight}px` }, fixedLeftTableWidth >1 && {width: `${fixedLeftTableWidth}px`} ]"
         >
           <table-frame v-bind="propsToLeftFixedTable" left-fixed>
-            <component :is="`Table${x}`" v-bind="propsToLeftFixedTable" left-fixed @header-resize="headerResize" @handle-event="handleEvent"/>
+            <component :is="`Table${x}`" v-bind="propsToLeftFixedTable" left-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.left, params)" ref="leftTable" :key="reloadKey" />
           </table-frame>
         </div>
 
@@ -62,7 +62,7 @@
             :style="[fixedRightTableWidth > 1 &&  x === 'Header' && {width: `${fixedRightTableWidth - verticalScrollWidthCorrection}px`,  marginRight: `${verticalScrollWidthCorrection}px` }, x === 'Body' &&  { overflowX: 'hidden', overfloxY: 'auto' }, x === 'Body' && $props.fullHeight != null && $props.fullHeight.enabled == true && {height: `${fixedTableHeight}px` }, fixedRightTableWidth > 1 && x === 'Body' && {width: `${fixedRightTableWidth}px`}]"
         >
           <table-frame v-bind="propsToRightFixedTable" right-fixed>
-            <component :is="`Table${x}`" v-bind="propsToRightFixedTable" right-fixed @header-resize="headerResize" @handle-event="handleEvent" />
+            <component :is="`Table${x}`" v-bind="propsToRightFixedTable" right-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.right, params)" ref="rightTable" :key="reloadKey" />
           </table-frame>
         </div>
       </div>
@@ -171,7 +171,13 @@ export default {
       unsyncH: null,
       isVerticallScrollVisible: false,
       normalTableFixedWidth: 0,
-      ...initialState(this, '')
+      tables: {
+        normal: 'normal',
+        left: 'left',
+        right: 'right'
+      },
+      ...initialState(this, ''),
+      reloadKey: 0
     }
   },
   methods: {
@@ -317,6 +323,25 @@ export default {
 
       this.fixedLeftTableWidth = this.getLeftFixedTableWidth()
       this.fixedRightTableWidth = this.getRightFixedTableWidth()
+    },
+    handleRowHeightResize(tableName, params) {
+      this.$nextTick(()=> {
+        if (tableName !== this.tables.left) {
+          if (this.$refs['leftTable']) {
+            this.$refs['leftTable'][1].setRowHeight(params, 'left')
+          }
+        }
+        if (tableName !== this.tables.right) {
+          if (this.$refs['rightTable']) {
+            this.$refs['rightTable'][1].setRowHeight(params, 'right')
+          }
+        }
+        if (tableName !== this.tables.normal) {
+          if (this.$refs['normalTable']) {
+            this.$refs['normalTable'][1].setRowHeight(params, 'normal')
+          }
+        }
+      });
     },
     toggleStatus(type, row, rowIndex, value) {
       // this.validateType(type, ['Expanded', 'Checked', 'Hide', 'Fold'], 'toggleStatus', false);
@@ -583,8 +608,9 @@ export default {
         event = null
       })
     },
-
-
+    reload() {
+      this.reloadKey++
+    }
   },
   created() {
   },
@@ -706,6 +732,20 @@ export default {
       return this.fullHeight != null
           ? this.tableHeight
           : this.fixHeaderAndSetBodyMaxHeight
+    }
+  },
+  watch: {
+    '$parent.bodyData': {
+      deep: true,
+      handler: function() {
+        this.reload()
+      }
+    },
+    visibleColumns: {
+      deep: true,
+      handler: function() {
+        this.reload()
+      }
     }
   }
 }

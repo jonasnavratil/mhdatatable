@@ -7,6 +7,8 @@
         :key="'table_row_' + rowIndex"
         :style="rowStyle(row)"
         :class="rowClass(row)"
+        :ref="'row_'+rowIndex.toString()"
+        v-resize.initial="(el) => handleRowResize(rowIndex, el)"
         >
           <td class="-selectable-column" v-if="shouldRenderSelection">
             <multi-select
@@ -20,6 +22,7 @@
           @mouseleave="onTippyMouseLeave" -->
 
           <td v-for="(col, colIndex) in tableColumns" :key="colIndex"
+
             :class="col.tdClass"
             :title="row[col.field]"
             :style="[col.tdStyle, { width: col.colStyle.width }]"
@@ -106,14 +109,17 @@ import MultiSelect from './MultiSelect.vue'
 import props from '../_mixins/props'
 import shouldRenderSelection from '../_mixins/shouldRenderSelection'
 import isColVisible from '../_utils/isColVisible'
+import resize from 'vue-resize-directive'
 
 export default {
   name: 'TableBody',
   components: { MultiSelect },
   mixins: [props, shouldRenderSelection],
+  directives: { resize },
   data() {
     return {
-      detailRowHeight: 0
+      detailRowHeight: 0,
+      rowsHeights: []
     }
   },
   methods: {
@@ -176,6 +182,30 @@ export default {
       }
 
       return {allCheck, indeterminate}
+    },
+    handleRowResize(rowIndex, el) {
+      const eventName = 'row-height-resize'
+      const height = el.getBoundingClientRect().height
+      const indexOf = this.rowsHeights.findIndex(x => x.rowIndex === rowIndex)
+      const rowHeight = { rowIndex, height }
+      if (indexOf > -1) {
+        if (this.rowsHeights[indexOf].height < height) {
+          this.rowsHeights[indexOf].height = height
+          this.$emit(eventName, rowHeight)
+        }
+      } else {
+        this.rowsHeights.push(rowHeight)
+        this.$emit(eventName, rowHeight)
+      }
+    },
+    setRowHeight(rowHeight, context) {
+      if (rowHeight) {
+        const rowKey = `row_${rowHeight.rowIndex}`
+        const actualHeight = this.$refs[rowKey][0].clientHeight
+        if (actualHeight < rowHeight.height) {
+          this.$refs[rowKey][0].style.height = `${rowHeight.height}px`
+        }
+      }
     }
   },
   computed: {
