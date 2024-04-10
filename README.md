@@ -1,4 +1,9 @@
 ---
+3.6.4 (10.04.2024)
+---
++ fix resize-senzor CSS
+
+---
 3.6.3 (02.04.2024)
 ---
 + just add changelog

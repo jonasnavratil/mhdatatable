@@ -247,8 +247,12 @@ export default {
     padding-top: 0;
     padding-bottom: 0;
 }
-
 /* .mh-datatable tbody tr {
     transition: transform 0.4s, top 0.4s, height 0.4s, background-color 0.1s, opacity 0.2s, visibility 0.5s;
 } */
+</style>
+<style>
+.resize-sensor {
+  display: none;
+}
 </style>
