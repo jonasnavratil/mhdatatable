@@ -1,4 +1,9 @@
 ---
+3.6.5 (20.05.2024)
+---
++ fix drag and drop columns and resizing
+
+---
 3.6.4 (10.04.2024)
 ---
 + fix resize-senzor CSS

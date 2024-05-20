@@ -38,7 +38,7 @@
                     }]"
         >
           <table-frame v-bind="propsToNormalTable">
-            <component :is="`Table${x}`" v-bind="propsToNormalTable" @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.normal, params)" ref="normalTable" :key="reloadKey" />
+            <component :is="`Table${x}`" v-bind="propsToNormalTable" @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.normal, params)" ref="normalTable" :key="x === 'Body' ? reloadKey : 0" />
           </table-frame>
         </div>
 
@@ -50,7 +50,7 @@
             :style="[ x === 'Body' &&  { overflow: 'hidden' }, x === 'Body' && $props.fullHeight != null && $props.fullHeight.enabled == true &&  {height: `${fixedTableHeight}px` }, fixedLeftTableWidth >1 && {width: `${fixedLeftTableWidth}px`} ]"
         >
           <table-frame v-bind="propsToLeftFixedTable" left-fixed>
-            <component :is="`Table${x}`" v-bind="propsToLeftFixedTable" left-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.left, params)" ref="leftTable" :key="reloadKey" />
+            <component :is="`Table${x}`" v-bind="propsToLeftFixedTable" left-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.left, params)" ref="leftTable" :key="x === 'Body' ? reloadKey : 0" />
           </table-frame>
         </div>
 
@@ -62,7 +62,7 @@
             :style="[fixedRightTableWidth > 1 &&  x === 'Header' && {width: `${fixedRightTableWidth - verticalScrollWidthCorrection}px`,  marginRight: `${verticalScrollWidthCorrection}px` }, x === 'Body' &&  { overflowX: 'hidden', overfloxY: 'auto' }, x === 'Body' && $props.fullHeight != null && $props.fullHeight.enabled == true && {height: `${fixedTableHeight}px` }, fixedRightTableWidth > 1 && x === 'Body' && {width: `${fixedRightTableWidth}px`}]"
         >
           <table-frame v-bind="propsToRightFixedTable" right-fixed>
-            <component :is="`Table${x}`" v-bind="propsToRightFixedTable" right-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.right, params)" ref="rightTable" :key="reloadKey" />
+            <component :is="`Table${x}`" v-bind="propsToRightFixedTable" right-fixed @header-resize="headerResize" @handle-event="handleEvent" @row-height-resize="(params) => handleRowHeightResize(tables.right, params)" ref="rightTable" :key="x === 'Body' ? reloadKey : 0" />
           </table-frame>
         </div>
       </div>
